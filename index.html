@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>សុខ ខេង Modern Phone Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@300;400;500;600;700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root{
+      --blue:#1a56db;--blue-d:#1240b0;--blue-l:#3b82f6;
+      --blue-50:#eff6ff;--blue-100:#dbeafe;
+      --navy:#0c1f4a;--white:#fff;--off:#f8fafd;--off2:#f1f5fb;
+      --text:#0f172a;--sub:#475569;--muted:#94a3b8;--border:#e2e8f0;
+      --sh-s:0 1px 4px rgba(15,23,42,.06),0 2px 8px rgba(15,23,42,.04);
+      --sh:0 4px 20px rgba(15,23,42,.08),0 1px 6px rgba(15,23,42,.05);
+      --sh-l:0 12px 48px rgba(15,23,42,.12),0 4px 16px rgba(15,23,42,.07);
+      --r:14px;--rl:22px;--ease:cubic-bezier(.25,.8,.25,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Sans Khmer','Nunito Sans',sans-serif;color:var(--text);background:var(--white);line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit;cursor:pointer}
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--off)}::-webkit-scrollbar-thumb{background:var(--blue-l);border-radius:99px}
+    .container{max-width:1160px;margin:0 auto;padding:0 28px}
+    .tag{display:inline-flex;align-items:center;gap:7px;font-size:.68rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--blue);background:var(--blue-50);border:1px solid var(--blue-100);border-radius:99px;padding:5px 14px;margin-bottom:14px}
+    .stitle{font-family:'Noto Sans Khmer',sans-serif;font-size:clamp(1.7rem,4vw,2.7rem);font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:14px}
+    .stitle span{color:var(--blue)}
+    .ssub{color:var(--sub);font-size:.95rem;max-width:520px;font-weight:400;line-height:1.8}
+    /* Reveal */
+    .rv{opacity:0;transform:translateY(28px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+    .rvl{opacity:0;transform:translateX(-36px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+    .rvr{opacity:0;transform:translateX(36px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+    .rv.v,.rvl.v,.rvr.v{opacity:1;transform:none}
+
+    /* Topbar */
+    .topbar{background:var(--navy);color:rgba(255,255,255,.7);font-size:.8rem;padding:9px 0}
+    .tbi{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+    .tbs{display:flex;gap:20px;align-items:center}
+    .topbar a{color:rgba(255,255,255,.7);display:flex;align-items:center;gap:6px;transition:color .2s;font-family:'Nunito Sans',sans-serif}
+    .topbar a:hover{color:#fff}
+    .topbar i{color:#60a5fa}
+
+    /* Nav */
+    nav{position:sticky;top:0;z-index:800;background:var(--white);border-bottom:1px solid var(--border);box-shadow:var(--sh-s);transition:box-shadow .3s}
+    nav.sc{box-shadow:var(--sh)}
+    .ni{display:flex;align-items:center;justify-content:space-between;padding:15px 0}
+    .nlogo{display:flex;align-items:center;gap:11px}
+    .nico{width:42px;height:42px;border-radius:11px;background:var(--blue);display:grid;place-items:center;color:#fff;font-size:1.05rem;flex-shrink:0}
+    .nt{font-family:'Noto Sans Khmer',sans-serif;font-size:1rem;font-weight:700;color:var(--navy);line-height:1.2}
+    .ns{font-family:'Nunito Sans',sans-serif;font-size:.7rem;color:var(--muted);font-weight:400;letter-spacing:.04em}
+    .nlinks{display:flex;align-items:center;gap:4px}
+    .nlinks a{font-size:.85rem;font-weight:500;color:var(--sub);padding:8px 13px;border-radius:8px;transition:all .2s;display:flex;align-items:center;gap:6px;font-family:'Noto Sans Khmer',sans-serif}
+    .nlinks a i{font-size:.77rem}
+    .nlinks a:hover{background:var(--off);color:var(--navy)}
+    .ncta{background:var(--blue)!important;color:#fff!important;font-weight:600!important;box-shadow:0 2px 8px rgba(26,86,219,.3)}
+    .ncta:hover{background:var(--blue-d)!important;transform:translateY(-1px)}
+    .ham{display:none}
+
+    /* Bottom Nav — mobile only */
+    .bot-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:900;background:var(--white);border-top:1px solid var(--border);box-shadow:0 -4px 20px rgba(15,23,42,.08);padding:0}
+    .bot-nav-inner{display:flex}
+    .bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px 12px;gap:4px;color:var(--muted);font-size:.65rem;font-weight:500;font-family:'Noto Sans Khmer',sans-serif;transition:color .2s;border:none;background:none;cursor:pointer;text-decoration:none}
+    .bn-item i{font-size:1.05rem}
+    .bn-item:hover,.bn-item.active{color:var(--blue)}
+
+    /* ── HERO ── */
+    #hero{background:var(--off);padding:80px 0 0;overflow:hidden;position:relative}
+    .hdots{position:absolute;inset:0;background-image:radial-gradient(circle,var(--border) 1.2px,transparent 1.2px);background-size:30px 30px;opacity:.7}
+    .hglow{position:absolute;right:-100px;top:-80px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(26,86,219,.09),transparent 70%);pointer-events:none}
+    .hgrid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:flex-end;position:relative;z-index:2}
+    .hcon{padding-bottom:80px}
+    .hbadge{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:99px;padding:6px 14px 6px 8px;font-size:.78rem;font-weight:500;color:var(--navy);margin-bottom:24px;box-shadow:var(--sh-s);font-family:'Noto Sans Khmer',sans-serif}
+    .hbadge .dot{width:26px;height:26px;border-radius:99px;background:var(--blue);display:grid;place-items:center;color:#fff;font-size:.65rem}
+    h1.hh{font-family:'Noto Sans Khmer',sans-serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:700;line-height:1.3;color:var(--navy);margin-bottom:20px}
+    h1.hh em{font-style:normal;color:var(--blue)}
+    .hdesc{color:var(--sub);font-size:.97rem;max-width:440px;margin-bottom:36px;font-family:'Noto Sans Khmer',sans-serif;font-weight:400;line-height:1.85}
+    .hbtns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+    .btnp{display:inline-flex;align-items:center;gap:9px;background:var(--blue);color:#fff;font-weight:600;font-size:.9rem;padding:13px 26px;border-radius:var(--r);border:none;transition:all .2s;box-shadow:0 2px 12px rgba(26,86,219,.3);font-family:'Noto Sans Khmer',sans-serif}
+    .btnp:hover{background:var(--blue-d);transform:translateY(-2px);box-shadow:0 6px 24px rgba(26,86,219,.35)}
+    .btng{display:inline-flex;align-items:center;gap:9px;background:var(--white);color:var(--navy);font-weight:600;font-size:.9rem;padding:13px 26px;border-radius:var(--r);border:1.5px solid var(--border);transition:all .2s;font-family:'Noto Sans Khmer',sans-serif}
+    .btng:hover{border-color:var(--blue-l);background:var(--blue-50);color:var(--blue)}
+
+    /* Hero Visual – Shop Signboard */
+    .hvis{display:flex;justify-content:center;align-items:flex-end;position:relative}
+    .signboard{position:relative;margin:0 0 0 20px;animation:sf 4s ease-in-out infinite}
+    @keyframes sf{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-10px) rotate(.3deg)}}
+    .sb-wrap{background:var(--white);border:1px solid var(--border);border-radius:var(--rl) var(--rl) 0 0;border-bottom:none;box-shadow:var(--sh-l);overflow:hidden;width:310px}
+    .sb-top{background:linear-gradient(135deg,var(--navy),var(--blue));padding:28px 28px 22px;position:relative}
+    .sb-top::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:20px;background:var(--white);border-radius:20px 20px 0 0}
+    .sb-brand{font-family:'Noto Sans Khmer',sans-serif;font-size:1.8rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:4px;text-shadow:0 2px 8px rgba(0,0,0,.2)}
+    .sb-tagline{color:rgba(255,255,255,.65);font-size:.78rem;font-family:'Nunito Sans',sans-serif;font-weight:400;letter-spacing:.06em;text-transform:uppercase}
+    .sb-body{padding:22px 24px 28px}
+    .sb-row{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--border)}
+    .sb-row:last-child{border-bottom:none}
+    .sb-ico{width:34px;height:34px;border-radius:9px;background:var(--blue-50);border:1px solid var(--blue-100);display:grid;place-items:center;color:var(--blue);font-size:.82rem;flex-shrink:0}
+    .sb-lbl{font-size:.67rem;color:var(--muted);font-weight:500;letter-spacing:.06em;text-transform:uppercase;font-family:'Nunito Sans',sans-serif}
+    .sb-val{font-size:.9rem;font-weight:500;color:var(--text);font-family:'Noto Sans Khmer',sans-serif}
+    .pill{position:absolute;background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:9px 13px;display:flex;align-items:center;gap:9px;box-shadow:var(--sh);font-size:.77rem;font-weight:500;color:var(--navy);font-family:'Nunito Sans',sans-serif;animation:pfa 3.5s ease-in-out infinite}
+    .pill i{color:var(--blue)}
+    .p1{top:40px;right:-18px;animation-delay:0s}
+    .p2{bottom:120px;left:-24px;animation-delay:1.3s}
+    @keyframes pfa{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+    /* Trust Bar */
+    .trust{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:22px 0}
+    .tri{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .titem{display:flex;align-items:center;gap:10px;font-size:.84rem;font-weight:400;color:var(--sub);font-family:'Noto Sans Khmer',sans-serif}
+    .titem i{color:var(--blue);font-size:1rem}
+    .tdiv{width:1px;height:28px;background:var(--border)}
+
+    /* About */
+    #about{padding:100px 0}
+    .abg{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+    .ac-main{background:var(--off);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
+    .ach{background:linear-gradient(135deg,var(--navy),var(--blue));padding:30px 30px 26px}
+    .achl{font-family:'Noto Sans Khmer',sans-serif;font-size:1.7rem;font-weight:700;color:#fff;line-height:1.2}
+    .achs{color:rgba(255,255,255,.6);font-size:.78rem;font-family:'Nunito Sans',sans-serif;font-weight:400;margin-top:4px;letter-spacing:.04em;text-transform:uppercase}
+    .acb{padding:18px 24px}
+    .ir{display:flex;align-items:flex-start;gap:13px;padding:13px 0;border-bottom:1px solid var(--border)}
+    .ir:last-child{border-bottom:none}
+    .ii{width:38px;height:38px;border-radius:10px;background:var(--blue-50);border:1px solid var(--blue-100);display:grid;place-items:center;flex-shrink:0;color:var(--blue);font-size:.85rem}
+    .il{font-size:.67rem;color:var(--muted);font-weight:500;letter-spacing:.07em;text-transform:uppercase;font-family:'Nunito Sans',sans-serif;margin-bottom:2px}
+    .iv{font-size:.9rem;font-weight:500;color:var(--text);font-family:'Noto Sans Khmer',sans-serif}
+    .avwrap{position:relative}
+    .amc{position:absolute;bottom:-18px;right:-18px;background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;box-shadow:var(--sh);display:flex;align-items:center;gap:12px}
+    .amci{width:42px;height:42px;border-radius:10px;background:var(--blue);display:grid;place-items:center;color:#fff;font-size:.97rem;flex-shrink:0}
+    .amcn{font-family:'Noto Sans Khmer',sans-serif;font-size:1.4rem;font-weight:700;color:var(--navy);line-height:1}
+    .amcl{font-size:.72rem;color:var(--muted);font-weight:600;font-family:'Nunito Sans',sans-serif}
+    .acon p{color:var(--sub);margin-bottom:14px;font-size:.95rem}
+    .fl{display:flex;flex-direction:column;gap:10px;margin-top:26px}
+    .fi{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;border-radius:var(--r);border:1px solid var(--border);transition:all .2s}
+    .fi:hover{border-color:var(--blue-l);box-shadow:var(--sh-s);background:var(--blue-50)}
+    .fii{width:36px;height:36px;border-radius:9px;background:var(--blue);display:grid;place-items:center;color:#fff;font-size:.83rem;flex-shrink:0;margin-top:2px}
+    .fit{font-weight:600;font-size:.9rem;color:var(--navy);margin-bottom:2px;font-family:'Noto Sans Khmer',sans-serif}
+    .fid{font-size:.82rem;color:var(--sub);font-family:'Noto Sans Khmer',sans-serif;font-weight:400;line-height:1.75}
+
+    /* ── BRANDS ── */
+    #brands{padding:100px 0;background:var(--off)}
+    .brands-intro{text-align:center;margin-bottom:56px}
+    .brands-intro .ssub{margin:0 auto;text-align:center}
+    .brands-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+    .brand-card{
+      background:var(--white);border:1px solid var(--border);
+      border-radius:var(--rl);padding:28px 24px;
+      transition:transform .3s var(--ease),box-shadow .3s,border-color .3s;
+      cursor:default;position:relative;overflow:hidden;
+      display:flex;flex-direction:column;align-items:center;text-align:center;
+    }
+    .brand-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:0;transition:opacity .3s}
+    .brand-card:hover{transform:translateY(-5px);box-shadow:var(--sh-l);border-color:var(--blue-l)}
+    .brand-card:hover::before{opacity:1}
+    .brand-logo-wrap{
+        justify-content: center;   /* center horizontally */
+  align-items: center;       /* center vertically */
+  height: 80px;      
+      display:grid;place-items:center;margin-bottom:18px;
+      font-size:2rem;flex-shrink:0;
+      background:var(--off);
+    }
+    .brand-img {
+  max-height: 60px;   /* control image height */
+  max-width: 100%;
+  object-fit: contain; /* keep ratio */
+}
+    .brand-card:hover .brand-logo-wrap{background:var(--blue-50);border-color:var(--blue-100)}
+    .brand-name-km{font-family:'Noto Sans Khmer',sans-serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:3px;line-height:1.3}
+    .brand-name-en{font-family:'Nunito Sans',sans-serif;font-size:.72rem;font-weight:500;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+    .brand-desc{font-family:'Noto Sans Khmer',sans-serif;font-size:.82rem;color:var(--sub);line-height:1.8;margin-bottom:14px;font-weight:400}
+    .brand-models{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
+    .bm-chip{font-size:.7rem;font-weight:600;color:var(--blue);background:var(--blue-50);border:1px solid var(--blue-100);border-radius:6px;padding:3px 9px;font-family:'Nunito Sans',sans-serif}
+
+    /* CTA Banner */
+    .ctab{background:linear-gradient(135deg,var(--navy),var(--blue));padding:72px 0;position:relative;overflow:hidden}
+    .ctab::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);background-size:32px 32px}
+    .ctai{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap}
+    .ctai h2{font-family:'Noto Sans Khmer',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:700;color:#fff;margin-bottom:8px;line-height:1.4}
+    .ctai p{color:rgba(255,255,255,.65);font-size:.9rem;max-width:440px;font-family:'Noto Sans Khmer',sans-serif;font-weight:400}
+    .cta-acts{display:flex;gap:12px;flex-wrap:wrap}
+    .btnw{display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--navy);font-weight:600;font-size:.9rem;padding:13px 26px;border-radius:var(--r);border:none;transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,.15);font-family:'Noto Sans Khmer',sans-serif}
+    .btnw:hover{background:var(--off);transform:translateY(-2px)}
+    .btnow{display:inline-flex;align-items:center;gap:9px;background:transparent;color:#fff;font-weight:600;font-size:.9rem;padding:13px 26px;border-radius:var(--r);border:1.5px solid rgba(255,255,255,.4);transition:all .2s;font-family:'Noto Sans Khmer',sans-serif}
+    .btnow:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.7)}
+
+    /* Contact */
+    #contact{padding:100px 0}
+    .cg{display:grid;grid-template-columns:1fr 1.2fr;gap:64px}
+    .cc{display:flex;flex-direction:column;gap:10px;margin-top:30px}
+    .ccard{display:flex;align-items:center;gap:15px;padding:16px 18px;border-radius:var(--r);border:1px solid var(--border);background:var(--off);transition:all .2s}
+    .ccard:hover{border-color:var(--blue-l);box-shadow:var(--sh-s);transform:translateX(5px)}
+    .cico{width:46px;height:46px;border-radius:12px;background:var(--blue);display:grid;place-items:center;color:#fff;font-size:1rem;flex-shrink:0}
+    .clbl{font-size:.67rem;color:var(--muted);font-weight:500;letter-spacing:.07em;text-transform:uppercase;font-family:'Nunito Sans',sans-serif;margin-bottom:2px}
+    .cval{font-weight:600;font-size:.92rem;color:var(--navy);font-family:'Noto Sans Khmer',sans-serif}
+    .fbx{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:36px;box-shadow:var(--sh)}
+    .fbt{font-family:'Noto Sans Khmer',sans-serif;font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:24px;display:flex;align-items:center;gap:10px}
+    .fbt i{color:var(--blue)}
+    .fr2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .fg{margin-bottom:14px}
+    .fg label{display:block;font-size:.68rem;font-weight:700;color:var(--sub);letter-spacing:.07em;text-transform:uppercase;font-family:'Nunito Sans',sans-serif;margin-bottom:6px}
+    .fg input,.fg textarea,.fg select{width:100%;padding:11px 14px;background:var(--off);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-family:'Noto Sans Khmer',sans-serif;font-size:.9rem;transition:all .2s;outline:none;appearance:none}
+    .fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,219,.1);background:var(--white)}
+    .fg textarea{resize:vertical;min-height:100px}
+    .btn-sub{width:100%;padding:13px;background:var(--blue);color:#fff;font-family:'Noto Sans Khmer',sans-serif;font-weight:700;font-size:.95rem;border:none;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:9px;transition:all .2s;box-shadow:0 2px 12px rgba(26,86,219,.25)}
+    .btn-sub:hover{background:var(--blue-d);transform:translateY(-2px);box-shadow:0 6px 24px rgba(26,86,219,.3)}
+    .fsok{display:none;text-align:center;padding:40px 16px;animation:fu .4s var(--ease)}
+    @keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+    .okc{width:66px;height:66px;border-radius:50%;background:#dcfce7;border:2px solid #86efac;display:grid;place-items:center;margin:0 auto 16px;color:#16a34a;font-size:1.65rem}
+    .fsok h3{font-family:'Noto Sans Khmer',sans-serif;font-size:1.2rem;color:var(--navy);margin-bottom:8px;font-weight:700}
+    .fsok p{color:var(--sub);font-size:.9rem;font-family:'Noto Sans Khmer',sans-serif;font-weight:400}
+
+    /* Map */
+    #map{padding:80px 0;background:var(--off)}
+    .maphd{text-align:center;margin-bottom:38px}
+    .mw{border-radius:var(--rl);overflow:hidden;border:1px solid var(--border);box-shadow:var(--sh-l)}
+    .mw iframe{display:block;width:100%;height:420px;border:0}
+
+    /* Footer */
+    footer{background:var(--navy);color:rgba(255,255,255,.7);padding:60px 0 26px}
+    .fg2{display:grid;grid-template-columns:2fr 1fr 1fr;gap:56px;margin-bottom:44px}
+    .flogo{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+    .flogo .nico{background:rgba(255,255,255,.1)}
+    .flogo .nt{color:#fff}
+    .flogo .ns{color:rgba(255,255,255,.4)}
+    .fabt{font-size:.87rem;line-height:1.85;max-width:280px;font-family:'Noto Sans Khmer',sans-serif;font-weight:400}
+    .fcol h5{font-weight:600;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:16px;font-family:'Nunito Sans',sans-serif}
+    .fcol ul{list-style:none}
+    .fcol ul li{margin-bottom:9px}
+    .fcol ul li a{font-size:.85rem;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:8px;transition:color .2s;font-family:'Noto Sans Khmer',sans-serif;font-weight:400}
+    .fcol ul li a i{color:#60a5fa;font-size:.77rem;width:13px;text-align:center}
+    .fcol ul li a:hover{color:#fff}
+    .fbot{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+    .fbot p{font-size:.78rem;color:rgba(255,255,255,.4);font-family:'Nunito Sans',sans-serif;font-weight:400}
+    .fsoc{display:flex;gap:8px}
+    .soc{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:grid;place-items:center;color:rgba(255,255,255,.6);font-size:.85rem;transition:all .2s}
+    .soc:hover{background:var(--blue);border-color:var(--blue);color:#fff;transform:translateY(-2px)}
+
+    /* Toast */
+    #toast{position:fixed;bottom:26px;right:26px;background:var(--navy);color:#fff;border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:12px 18px;font-size:.86rem;font-weight:600;display:flex;align-items:center;gap:10px;z-index:9000;box-shadow:var(--sh-l);transform:translateY(80px);opacity:0;transition:transform .4s var(--ease),opacity .4s;pointer-events:none;font-family:'Nunito Sans',sans-serif}
+    #toast.show{transform:none;opacity:1}
+
+    /* Responsive */
+    @media(max-width:960px){
+      .hgrid,.abg,.cg{grid-template-columns:1fr}
+      .hvis,.amc{display:none}
+      .fg2{grid-template-columns:1fr 1fr}
+      .tdiv{display:none}
+      .tri{justify-content:flex-start;gap:16px}
+      .nlinks{display:none}
+      .ham{display:none}
+      .bot-nav{display:block}
+      body{padding-bottom:64px}
+      .fr2{grid-template-columns:1fr}
+      .tbs:last-child{display:none}
+      footer{padding-bottom:80px}
+    }
+    @media(max-width:640px){
+      .fg2{grid-template-columns:1fr}
+      .hstats{gap:20px}
+      .ctai{flex-direction:column}
+      .brands-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:400px){
+      .brands-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="container tbi">
+    <div class="tbs">
+      <a href="#map"><i class="fa-solid fa-location-dot"></i> កំពង់ចាម, កម្ពុជា</a>
+      <a><i class="fa-solid fa-clock"></i> ច័ន្ទ–អាទិត្យ &nbsp;7:00 – 20:00</a>
+    </div>
+    <div class="tbs">
+      <a href="tel:012 76 06 76"><i class="fa-solid fa-phone"></i> 012 706 767</a>
+      <a href="tel:010 76 0667"><i class="fa-solid fa-mobile-screen-button"></i> 010 706 076</a>
+    </div>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="container ni">
+    <a href="#hero" class="nlogo">
+      <div class="nico"><i class="fa-solid fa-mobile-screen"></i></div>
+      <div>
+        <div class="nt">សុខ ខេង</div>
+        <div class="ns">Modern Phone Shop</div>
+      </div>
+    </a>
+    <div class="nlinks">
+      <a href="#about"><i class="fa-solid fa-store"></i> អំពីយើង</a>
+      <a href="#brands"><i class="fa-solid fa-mobile-screen-button"></i> ម៉ាកទូរស័ព្ទ</a>
+      <a href="#contact"><i class="fa-regular fa-envelope"></i> ទំនាក់ទំនង</a>
+      <a href="#map"><i class="fa-solid fa-map-pin"></i> ទីតាំង</a>
+      <a href="tel:012 76 06 76" class="ncta"><i class="fa-solid fa-phone"></i> ទូរស័ព្ទមក</a>
+    </div>
+    <div class="ham" id="ham"></div>
+  </div>
+</nav>
+
+<!-- Bottom Nav — mobile -->
+<div class="bot-nav">
+  <div class="bot-nav-inner">
+    <a href="#hero"    class="bn-item"><i class="fa-solid fa-house"></i>ដើម</a>
+    <a href="#about"   class="bn-item"><i class="fa-solid fa-store"></i>អំពី</a>
+    <a href="#brands"  class="bn-item"><i class="fa-solid fa-mobile-screen-button"></i>ម៉ាក</a>
+    <a href="#contact" class="bn-item"><i class="fa-regular fa-envelope"></i>សារ</a>
+    <a href="tel:012 76 06 76" class="bn-item" style="color:var(--blue)"><i class="fa-solid fa-phone"></i>ហៅ</a>
+  </div>
+</div>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hdots"></div>
+  <div class="hglow"></div>
+  <div class="container">
+    <div class="hgrid">
+      <div class="hcon">
+        <div class="hbadge rv">
+          <div class="dot"><i class="fa-solid fa-check fa-xs"></i></div>
+          ហាងទូរស័ព្ទដៃ ·  Modern Phone Shop · Cambodia
+        </div>
+        <h1 class="hh rv">
+          ចង់បានទូរស័ព្ទ<br><em>ល្អ</em> ក្នុងតម្លៃ<br><em>សមរម្យ</em>?
+        </h1>
+        <p class="hdesc rv">
+          ហាងសុខ ខេង ជាហាងលក់ទូរស័ព្ទដៃគ្រប់ម៉ាក មានទំនិញពិតប្រាកដ ធានា១០០% ជាមួយតម្លៃល្អបំផុតនៅខេត្តកំពង់ចាម។
+        </p>
+        <div class="hbtns rv">
+          <a href="#brands" class="btnp"><i class="fa-solid fa-mobile-screen-button"></i> មើលម៉ាកទូរស័ព្ទ</a>
+          <a href="#contact" class="btng"><i class="fa-regular fa-envelope"></i> ផ្ញើសារ</a>
+        </div>
+      </div>
+      <div class="hvis rvr">
+        <div class="signboard">
+          <div class="sb-wrap">
+            <div class="sb-top">
+              <div class="sb-brand">សុខ ខេង</div>
+              <div class="sb-tagline">Modern Phone Shop</div>
+            </div>
+            <div class="sb-body">
+              <div class="sb-row">
+                <div class="sb-ico"><i class="fa-solid fa-location-dot"></i></div>
+                <div><div class="sb-lbl">Location</div><div class="sb-val">ផ្សារបែកអន្លង់, ស្រុកស្ទឹងត្រង់, ខេត្តកំពង់ចាម, កម្ពុជា</div></div>
+              </div>
+              <div class="sb-row">
+                <div class="sb-ico"><i class="fa-solid fa-phone"></i></div>
+                <div><div class="sb-lbl">Phone</div><div class="sb-val">012 706 767</div></div>
+              </div>
+              <div class="sb-row">
+                <div class="sb-ico"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <div><div class="sb-lbl">Phone 2</div><div class="sb-val">010 706 076</div></div>
+              </div>
+              <div class="sb-row">
+                <div class="sb-ico"><i class="fa-regular fa-clock"></i></div>
+                <div><div class="sb-lbl">Hours</div><div class="sb-val">ច័ន្ទ–អាទិត្យ &nbsp;7:00–20:00</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Bar -->
+<div class="trust">
+  <div class="container tri">
+    <div class="titem"><i class="fa-solid fa-certificate"></i><span>ទំនិញពិតប្រាកដ</span></div>
+    <div class="tdiv"></div>
+    <div class="titem"><i class="fa-solid fa-shield-halved"></i><span>មានការធានា</span></div>
+    <div class="tdiv"></div>
+    <div class="titem"><i class="fa-solid fa-tags"></i><span>តម្លៃសមរម្យ</span></div>
+    <div class="tdiv"></div>
+    <div class="titem"><i class="fa-solid fa-headset"></i><span>សេវា After-Sales</span></div>
+    <div class="tdiv"></div>
+    <div class="titem"><i class="fa-solid fa-store"></i><span>ទូរស័ព្ទគ្រប់ម៉ាក</span></div>
+  </div>
+</div>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <div class="abg">
+      <div class="rvl">
+        <div class="avwrap">
+          <div class="ac-main">
+            <div class="ach">
+              <div class="achl">ហាងសុខ ខេង</div>
+              <div class="achs">Modern Phone Shop · Kampong Cham</div>
+            </div>
+            <div class="acb">
+              <div class="ir">
+                <div class="ii"><i class="fa-solid fa-location-dot"></i></div>
+                <div><div class="il">ទីតាំង</div><div class="iv">ខេត្តកំពង់ចាម, កម្ពុជា</div></div>
+              </div>
+              <div class="ir">
+                <div class="ii"><i class="fa-solid fa-phone"></i></div>
+                <div><div class="il">ទូរស័ព្ទ</div><div class="iv">012 706 767 &nbsp;·&nbsp; 010 706 076</div></div>
+              </div>
+              <div class="ir">
+                <div class="ii"><i class="fa-regular fa-clock"></i></div>
+                <div><div class="il">ម៉ោងបើក</div><div class="iv">ច័ន្ទ – អាទិត្យ: 7:00 ព្រឹក – 8:00 យប់</div></div>
+              </div>
+              <div class="ir">
+                <div class="ii"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <div><div class="il">ទំនិញ</div><div class="iv">ទូរស័ព្ទដៃគ្រប់ម៉ាក និងឧបករណ៍បន្ទាប់បន្សំ</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="amc">
+            <div class="amci"><i class="fa-solid fa-star"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="acon rvr">
+        <div class="tag"><i class="fa-solid fa-store"></i> អំពីហាង</div>
+        <h2 class="stitle">ហាង<span>សុខ ខេង</span><br>Modern Phone Shop</h2>
+        <p class="acon p" style="color:var(--sub);margin-bottom:12px">ហាងសុខ ខេង ជាហាងលក់ទូរស័ព្ទដៃដែលមានការជឿទុកចិត្ត ស្ថិតក្នុងស្រុកស្ទឹងត្រង់ ខេត្តកំពង់ចាម ។ យើងខ្ញុំមានទូរស័ព្ទគ្រប់ម៉ាកល្បីៗ ជាមួយតម្លៃសមរម្យ និងសេវាកម្មប្រកបដោយភាពស្មោះត្រង់។</p>
+        <p style="color:var(--sub);font-size:.93rem;font-family:'Noto Sans Khmer',sans-serif;margin-bottom:6px">ទូរស័ព្ទរបស់យើងខ្ញុំគ្រប់ម៉ាកសុទ្ធតែពិតប្រាកដ ជាមួយការធានាផ្លូវការពី Brand ។ ក្រុមការងាររបស់យើងនឹងជួយអ្នករកទូរស័ព្ទដែលសមស្របតាមតម្រូវការ និងថវិការបស់អ្នក។</p>
+        <div class="fl">
+          <div class="fi">
+            <div class="fii"><i class="fa-solid fa-certificate"></i></div>
+            <div><div class="fit">ទំនិញពិតប្រាកដ</div><div class="fid">ទូរស័ព្ទទាំងអស់មានការធានា ១០០% ពី Brand ផ្ទាល់</div></div>
+          </div>
+          <div class="fi">
+            <div class="fii"><i class="fa-solid fa-wrench"></i></div>
+            <div><div class="fit">សេវាបន្ទាប់ពីការទិញ</div><div class="fid">យើងមានជំនាញបច្ចេកទេស ជួសជុល និងណែនាំការប្រើប្រាស់</div></div>
+          </div>
+          <div class="fi">
+            <div class="fii"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+            <div><div class="fit">តម្លៃល្អបំផុត</div><div class="fid">យើងផ្តល់តម្លៃត្រឹមត្រូវ ប្រកបដោយតម្លាភាព</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Brands -->
+<section id="brands">
+  <div class="container">
+    <div class="brands-intro rv">
+      <div class="tag" style="display:inline-flex"><i class="fa-solid fa-mobile-screen-button"></i> ម៉ាកទូរស័ព្ទ</div>
+      <h2 class="stitle">ម៉ាក<span>ទូរស័ព្ទ</span>ដែលយើងមាន</h2>
+      <p class="ssub">យើងមានទូរស័ព្ទម៉ាកល្បីៗជាច្រើន គ្រប់ Category ពី Budget រហូតដល់ Flagship — គ្រប់ Model គ្រប់តម្លៃ</p>
+    </div>
+    <div class="brands-grid" id="brandsGrid"></div>
+  </div>
+</section>
+
+<!-- CTA Banner -->
+<div class="ctab">
+  <div class="container ctai">
+    <div class="rv">
+      <h2>ចង់បានទូរស័ព្ទថ្មី?<br>ទំនាក់ទំនងយើងថ្ងៃនេះ!</h2>
+      <p>ចូលមកហាងផ្ទាល់ ឬទូរស័ព្ទសួរតម្លៃ — យើងខ្ញុំនឹងជួយអ្នករកទូរស័ព្ទដែលល្អបំផុតក្នុងតម្លៃសមរម្យ</p>
+    </div>
+    <div class="cta-acts rv">
+      <a href="tel:012 76 06 76" class="btnw"><i class="fa-solid fa-phone"></i> ហៅ 012 706 767</a>
+      <a href="#contact" class="btnow"><i class="fa-regular fa-envelope"></i> ផ្ញើសារ</a>
+    </div>
+  </div>
+</div>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:50px" class="rv">
+      <div class="tag" style="display:inline-flex"><i class="fa-solid fa-headset"></i> ទំនាក់ទំនង</div>
+      <h2 class="stitle" style="text-align:center">យើងរង់ចាំ<span>ជួយ</span>អ្នក</h2>
+      <p class="ssub" style="margin:0 auto;text-align:center">ទូរស័ព្ទ ចូលមកហាង ឬផ្ញើសារ — យើងតស្បៀតស្ដីជូន</p>
+    </div>
+    <div class="cg">
+      <div class="rvl">
+        <h3 style="font-family:'Noto Sans Khmer',sans-serif;font-size:1.15rem;color:var(--navy);margin-bottom:6px;font-weight:800">ព័ត៌មានទំនាក់ទំនង</h3>
+        <p style="color:var(--sub);font-size:.88rem;font-family:'Noto Sans Khmer',sans-serif">អ្នកអាចទំនាក់ទំនងយើងតាមរបៀបណាក៏បានក្នុងម៉ោងបើកហាង</p>
+        <div class="cc">
+          <a href="tel:012 76 06 76" class="ccard">
+            <div class="cico"><i class="fa-solid fa-phone"></i></div>
+            <div><div class="clbl">Primary Phone</div><div class="cval">012 706 767</div></div>
+            <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--muted);font-size:.72rem"></i>
+          </a>
+          <a href="tel:010 76 0667" class="ccard">
+            <div class="cico"><i class="fa-solid fa-mobile-screen-button"></i></div>
+            <div><div class="clbl">Secondary Phone</div><div class="cval">010 706 076</div></div>
+            <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:var(--muted);font-size:.72rem"></i>
+          </a>
+          <a href="https://maps.app.goo.gl/Y6cnZXCarg1fimLe8" target="_blank" class="ccard">
+            <div class="cico"><i class="fa-solid fa-location-dot"></i></div>
+            <div><div class="clbl">ទីតាំង</div><div class="cval">បើក Google Maps</div></div>
+            <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left:auto;color:var(--muted);font-size:.72rem"></i>
+          </a>
+          <div class="ccard" style="cursor:default">
+            <div class="cico"><i class="fa-regular fa-clock"></i></div>
+            <div><div class="clbl">ម៉ោងបើក</div><div class="cval">ច័ន្ទ – អាទិត្យ: 7:00 – 20:00</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="rvr">
+        <div class="fbx">
+          <div id="formBody">
+            <div class="fbt"><i class="fa-regular fa-paper-plane"></i> ផ្ញើសារមកហាង</div>
+            <div class="fr2">
+              <div class="fg"><label>ឈ្មោះ</label><input type="text" id="fn" placeholder="ឈ្មោះរបស់អ្នក"></div>
+              <div class="fg"><label>លេខទូរស័ព្ទ</label><input type="tel" id="fp" placeholder="0xx xxx xxx"></div>
+            </div>
+            <div class="fg">
+              <label>ម៉ាកទូរស័ព្ទដែលចង់ដឹង</label>
+              <select id="fi">
+                <option value="">— ជ្រើសរើសម៉ាក —</option>
+                <option>iPhone (Apple)</option>
+                <option>Samsung</option>
+                <option>OPPO</option>
+                <option>Xiaomi / Redmi</option>
+                <option>Vivo</option>
+                <option>Tecno</option>
+                <option>Infinix</option>
+                <option>Huawei</option>
+                <option>OnePlus</option>
+                <option>ឧបករណ៍បន្ទាប់បន្សំ / ផ្សេងៗ</option>
+              </select>
+            </div>
+            <div class="fg"><label>សំណួរ / សារ</label><textarea id="fm" placeholder="សួរអំពីតម្លៃ ទំនិញ ឬព័ត៌មានផ្សេងៗ…"></textarea></div>
+            <button class="btn-sub" onclick="sendMsg()"><i class="fa-regular fa-paper-plane"></i> ផ្ញើសារ</button>
+          </div>
+          <div class="fsok" id="fok">
+            <div class="okc"><i class="fa-solid fa-check"></i></div>
+            <h3>បានទទួលសារហើយ!</h3>
+            <p>អរគុណ! យើងនឹងឆ្លើយតបឱ្យបានឆាប់ជាអតិបរមា<br>ឬទូរស័ព្ទមកដោយផ្ទាល់ <strong style="color:var(--blue)">012 706 767</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Map -->
+<section id="map">
+  <div class="container">
+    <div class="maphd rv">
+      <div class="tag" style="display:inline-flex"><i class="fa-solid fa-map-pin"></i> ទីតាំង</div>
+      <h2 class="stitle" style="text-align:center">ទីតាំង<span>ហាង</span>យើង</h2>
+      <p class="ssub" style="margin:0 auto;text-align:center">
+        ខេត្តកំពង់ចាម, កម្ពុជា —
+        <a href="https://maps.app.goo.gl/Y6cnZXCarg1fimLe8" target="_blank" style="color:var(--blue);font-weight:700">
+          <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i> បើក Google Maps
+        </a>
+      </p>
+    </div>
+    <div class="mw rv">
+      <iframe src="https://www.google.com/maps/embed?pb=!3m2!1skm!2skh!4v1776990455468!5m2!1skm!2skh!6m8!1m7!1spqDTKCJa60fzQz8xRofg_w!2m2!1d12.36227065235297!2d105.5873853418327!3f87.69571168335216!4f0.9415859085306693!5f0.4000000000000002"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="fg2">
+      <div>
+        <div class="flogo">
+          <div class="nico"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div><div class="nt">សុខ ខេង</div><div class="ns">Modern Phone Shop</div></div>
+        </div>
+        <p class="fabt">ហាងលក់ទូរស័ព្ទដៃគ្រប់ម៉ាក ស្ថិតនៅខេត្តកំពង់ចាម។ ទំនិញពិតប្រាកដ តម្លៃសមរម្យ និងសេវាកម្មដ៏ល្អ — រៀងរាល់ថ្ងៃ។</p>
+      </div>
+      <div class="fcol">
+        <h5>Links</h5>
+        <ul>
+          <li><a href="#about"><i class="fa-solid fa-chevron-right"></i> អំពីហាង</a></li>
+          <li><a href="#brands"><i class="fa-solid fa-chevron-right"></i> ម៉ាកទូរស័ព្ទ</a></li>
+          <li><a href="#contact"><i class="fa-solid fa-chevron-right"></i> ទំនាក់ទំនង</a></li>
+          <li><a href="#map"><i class="fa-solid fa-chevron-right"></i> ទីតាំង</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:012 76 06 76"><i class="fa-solid fa-phone"></i> 012 706 767</a></li>
+          <li><a href="tel:010 76 0667"><i class="fa-solid fa-mobile-screen-button"></i> 010 706 076</a></li>
+          <li><a href="https://maps.app.goo.gl/Y6cnZXCarg1fimLe8" target="_blank"><i class="fa-solid fa-location-dot"></i> កំពង់ចាម</a></li>
+          <li><a><i class="fa-regular fa-clock"></i> 7AM – 8PM ជារៀងរាល់ថ្ងៃ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbot">
+      <p>© 2025 ហាងសុខ ខេង Modern Phone Shop. រក្សាសិទ្ធិគ្រប់យ៉ាង។</p>
+      <div class="fsoc">
+        <a href="tel:012 76 06 76" class="soc"><i class="fa-solid fa-phone"></i></a>
+        <a href="https://maps.app.goo.gl/Y6cnZXCarg1fimLe8" target="_blank" class="soc"><i class="fa-solid fa-map-pin"></i></a>
+        <a href="#contact" class="soc"><i class="fa-regular fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="toast"><i class="fa-solid fa-circle-check" style="color:#4ade80"></i><span id="tmsg"></span></div>
+
+<script>
+/* ── Brand data ─────────────────────────── */
+const BRANDS = [
+  {
+    image: "./images/images.png",
+    km: "Apple iPhone",
+    en: "Apple iPhone",
+    desc: "ស្មាតហ្វូនលំដាប់ពិភពលោក ល្បីល្បាញលើប្រព័ន្ធប្រតិបត្តិការ iOS មានសុវត្ថិភាពខ្ពស់ ដំណើរការរលូន និងប្រើប្រាស់បានយូរអង្វែង។",
+    models: ["iPhone 15 Series", "iPhone 14", "iPhone 13", "iPhone SE"]
+  },
+  {
+    image: "./images/samsung.avif",
+    km: "Samsung",
+    en: "Samsung",
+    desc: "កំពូលស្មាតហ្វូន Android ពីកូរ៉េខាងត្បូង ផ្ដល់ជូនជម្រើសច្រើនតម្រូវការ ចាប់ពីស៊េរីថវិកា រហូតដល់កំពូលស្មាតហ្វូនអេក្រង់បត់។",
+    models: ["Galaxy S24 Ultra", "Galaxy Z Fold5", "Galaxy A55", "Galaxy A15"]
+  },
+  {
+    image: "https://images.seeklogo.com/logo-png/61/1/oppo-logo-png_seeklogo-619541.png",
+    km: "OPPO",
+    en: "OPPO",
+    desc: "ឈានមុខគេលើបច្ចេកវិទ្យាសាកថ្មរហ័ស SuperVOOC និងការរចនាបែបយុវវ័យ ពិសេសសមត្ថភាពថតរូប Portrait បានយ៉ាងស្រស់ស្អាត។",
+    models: ["Reno12 Pro", "Find X8", "A98", "A60"]
+  },
+  {
+    image: "https://cdn.worldvectorlogo.com/logos/xiaomi-1.svg",
+    km: "Xiaomi / Redmi",
+    en: "Xiaomi / Redmi",
+    desc: "ស្ដេចសមត្ថភាពក្នុងតម្លៃសមរម្យ បំពាក់ដោយ Spec ខ្ពស់ កម្លាំងម៉ាស៊ីនខ្លាំងស័ក្តិសមបំផុតសម្រាប់អ្នកចូលចិត្តលេងហ្គេម និងការកម្សាន្ត។",
+    models: ["Xiaomi 14", "Redmi Note 13 Pro", "Redmi 13C", "POCO X6 Pro"]
+  },
+  {
+    image: "https://www.logo.wine/a/logo/Vivo_(technology_company)/Vivo_(technology_company)-Logo.wine.svg",
+    km: "Vivo",
+    en: "Vivo",
+    desc: "ផ្តោតសំខាន់លើសោភ័ណភាពនៃការរចនា និងបច្ចេកវិទ្យាកាមេរ៉ា Aura Light ដែលជួយឱ្យការថតរូបមានពន្លឺស្អាតបែបធម្មជាតិ។",
+    models: ["V30 Pro", "V29 5G", "Y200", "Y100"]
+  },
+  {
+    image: "https://getlogovector.com/wp-content/uploads/2021/05/tecno-mobile-logo-vector.png",
+    km: "Tecno",
+    en: "Tecno",
+    desc: "ម៉ាកទូរស័ព្ទដែលកំពុងមានប្រជាប្រិយភាពខ្លាំង ផ្ដល់នូវបទពិសោធន៍ថ្មីៗ កម្លាំងថ្មធំ និងរូបរាងទាន់សម័យក្នុងតម្លៃធូរថ្លៃ។",
+    models: ["Spark 20 Pro+", "Camon 30", "Phantom V Flip", "Pop 8"]
+  },
+  {
+    image: "https://brandlogos.net/wp-content/uploads/2022/03/infinix_mobile-logo-brandlogos.net_.png",
+    km: "Infinix",
+    en: "Infinix",
+    desc: "ផ្តល់នូវបច្ចេកវិទ្យាសាកថ្មល្បឿនលឿន និងអេក្រង់ធំច្បាស់កម្រិតខ្ពស់ ស័ក្តិសមសម្រាប់សិស្សនិស្សិត និងការប្រើប្រាស់ទូទៅ។",
+    models: ["Note 40 Pro", "Hot 40 Pro", "Smart 8", "Zero 30 5G"]
+  },
+  {
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvgKNpxZO2zA9BfOPHKof3TWql8Hj5X6J3fg&s",
+    km: "Huawei",
+    en: "Huawei",
+    desc: "បច្ចេកវិទ្យាកាមេរ៉ាលំដាប់អាជីព និងអេក្រង់ OLED ដ៏ស្រស់ស្អាត ជាមួយប្រព័ន្ធប្រត្តិបត្តិការ HarmonyOS ដ៏ឆ្លាតវៃ។",
+    models: ["P60 Pro", "Mate 60 Pro", "Nova 12", "MatePad Series"]
+  },
+  {
+    image: "https://download.logo.wine/logo/OnePlus/OnePlus-Logo.wine.png",
+    km: "OnePlus",
+    en: "OnePlus",
+    desc: "ល្បីល្បាញខ្លាំងលើល្បឿនដំណើរការ 'Fast and Smooth' បំពាក់ដោយបន្ទះឈីបកំពូលៗ និងបច្ចេកវិទ្យាសាកថ្មលឿនបំផុត។",
+    models: ["OnePlus 12", "OnePlus 12R", "Nord 4", "Nord CE 4"]
+  },
+  {
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRFhBlh8hQgFUjvLPHhUQapTjUjyAqA9OdmA&s",
+    km: "ទូរស័ព្ទផ្សេងៗ",
+    en: "Other Brands",
+    desc: "យើងក៏មានចែកចាយនូវម៉ាកល្បីៗដទៃទៀតដូចជា Realme, Google Pixel, Sony និង Nokia តាមតម្រូវការរបស់លោកអ្នក។",
+    models: ["Realme", "Google Pixel", "Sony", "Nokia"]
+  }
+];
+
+function renderBrands(){
+  document.getElementById('brandsGrid').innerHTML = BRANDS.map((b,i)=>`
+    <div class="brand-card rv" style="transition-delay:${i*60}ms">
+      <div class="brand-logo-wrap" style="background:${b.bg};border-color:${b.bg}">
+        <img src="${b.image}" alt="${b.en}" class="brand-img" />
+      </div>
+      <div class="brand-name-km">${b.km}</div>
+      <div class="brand-name-en">${b.en}</div>
+      <div class="brand-desc">${b.desc}</div>
+      <div class="brand-models">${b.models.map(m=>`<span class="bm-chip">${m}</span>`).join('')}</div>
+    </div>
+  `).join('');
+
+  setTimeout(()=>document.querySelectorAll('#brandsGrid .rv').forEach(el=>obs.observe(el)),30);
+}
+
+/* ── Form ───────────────────────────────── */
+function sendMsg(){
+  const n=document.getElementById('fn').value.trim();
+  const p=document.getElementById('fp').value.trim();
+  if(!n||!p){showToast('សូមបំពេញឈ្មោះ និងលេខទូរស័ព្ទ',true);return}
+  document.getElementById('formBody').style.display='none';
+  document.getElementById('fok').style.display='block';
+  showToast('បានផ្ញើសារជោគជ័យ!');
+}
+function showToast(msg,err){
+  const t=document.getElementById('toast');
+  document.getElementById('tmsg').textContent=' '+msg;
+  t.querySelector('i').style.color=err?'#f87171':'#4ade80';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+/* ── Scroll reveal ──────────────────────── */
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')}),{threshold:.1});
+function initReveal(){document.querySelectorAll('.rv,.rvl,.rvr').forEach(el=>obs.observe(el))}
+
+/* ── Nav ────────────────────────────────── */
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>40));
+
+renderBrands();
+initReveal();
+</script>
+</body>
+</html>
